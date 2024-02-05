@@ -2,5 +2,5 @@
   NODE_VERSION = "16"
 
 [build]
-  command = "npm run build"
-  publish = "out" # Only if you're using `next export`
+  command = "npm run build && next export" # Apenas necessário se você estiver utilizando `next export`
+  publish = "out" # Use isso para sites estáticos gerados com `next export`
