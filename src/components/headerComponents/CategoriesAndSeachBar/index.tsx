@@ -2,7 +2,6 @@ import React, { FormEvent, useState } from "react";
 import { FaCaretDown, FaCaretRight, FaSearch, FaBars } from "react-icons/fa";
 import { useRouter } from "next/router";
 import ClickAwayListener from "react-click-away-listener";
-import Link from "next/link";
 
 import { useFilterBar } from "../../../contexts/filterBarContext";
 import MobileMenu from "../MobileMenu";

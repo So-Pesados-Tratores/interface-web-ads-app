@@ -1,11 +1,11 @@
 import React from "react";
-import { FaTimes, FaSignInAlt } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { Container } from "./styles";
 import { useUser } from "../../../contexts/userContext";
-import { ICategory, useFilterBar } from "../../../contexts/filterBarContext";
+import { useFilterBar } from "../../../contexts/filterBarContext";
 
 interface IProps {
   setMobileMenuActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,26 +16,6 @@ export default function MobileMenu({ setMobileMenuActive, searchBar }: IProps) {
   const userContext = useUser();
   const { getCategories } = useFilterBar();
   const router = useRouter();
-
-  function handleLoginModal() {
-    setMobileMenuActive(false);
-    userContext.handleSwitchModal();
-  }
-
-  function handleUserAccount() {
-    setMobileMenuActive(false);
-    router.push({
-      pathname: "/account",
-      query: {
-        menu: "account-data",
-      },
-    });
-  }
-
-  function handleUserLogout() {
-    setMobileMenuActive(false);
-    userContext.logOut();
-  }
 
   const categoryList = () => (
     <div className="category-menu">
