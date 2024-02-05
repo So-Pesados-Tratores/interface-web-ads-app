@@ -1,10 +1,8 @@
 import React from "react";
 import { FaTimes } from "react-icons/fa";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { Container } from "./styles";
-import { useUser } from "../../../contexts/userContext";
 import { useFilterBar } from "../../../contexts/filterBarContext";
 
 interface IProps {
@@ -13,9 +11,7 @@ interface IProps {
 }
 
 export default function MobileMenu({ setMobileMenuActive, searchBar }: IProps) {
-  const userContext = useUser();
   const { getCategories } = useFilterBar();
-  const router = useRouter();
 
   const categoryList = () => (
     <div className="category-menu">
