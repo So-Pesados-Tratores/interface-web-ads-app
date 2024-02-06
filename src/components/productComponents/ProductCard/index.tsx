@@ -1,62 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import api from "../../../services/api"; // Importando o módulo api configurado
 import { Container } from "./styles";
 import { IProduct } from "../../../pages/product/[productId]";
 
 interface IProps {
-  product: IProduct;
+  iProduct: IProduct;
 }
 
-export default function ProductCard({ product }: IProps) {
+// Ajuste a interface conforme necessário para corresponder aos dados da sua API
+interface ProductDetails {
+  id: string;
+  title: string;
+  record_fields: Array<{
+    name: string;
+    value: string;
+  }>;
+}
+
+export default function ProductCard({ iProduct }: IProps) {
+  const [product, setProduct] = useState<ProductDetails | null>(null);
   const router = useRouter();
 
-  function handleProductClickAnchor(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) {
-    event.preventDefault();
-    const href = `/product/${product.id}?title=${encodeURIComponent(
-      product.nome
-    )}`;
+  useEffect(() => {
+    async function fetchProduct() {
+      const query = JSON.stringify({
+        query: `{ table_record(id: "${product.id}") { id title record_fields { name value } } }`,
+      });
+
+      try {
+        // Usando o módulo api para fazer a requisição
+        const response = await api.post("", query);
+
+        if (
+          response.data &&
+          response.data.data &&
+          response.data.data.table_record
+        ) {
+          setProduct(response.data.data.table_record);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar detalhes do produto:", error);
+      }
+    }
+
+    fetchProduct();
+  }, [iProduct]);
+
+  if (!product) return <div>Carregando...</div>; // Renderiza algo enquanto os dados não são carregados
+
+  // Função para tratar o clique no produto, direcionando para a página do produto
+  function handleProductClick() {
+    const href = `/product/${product.id}`;
     router.push(href);
   }
 
   return (
-    <Container data-testid="product-card">
-      <a
-        title={product.nome}
-        data-testid="product-card-anchor"
-        onClick={handleProductClickAnchor}
-        href={`/product/${product.id}?title=${encodeURIComponent(
-          product.nome
-        )}`}
-      >
-        {/* Removido a lógica de estoque e desconto para simplificar o exemplo */}
-        <div className="product-info">
-          <figure className="img-container">
-            <img
-              src={
-                product.imagens && product.imagens.length > 0
-                  ? product.imagens[0]
-                  : "/images/img-n-disp.png"
-              }
-              alt={`imagem-${product.nome}`}
-            />
-          </figure>
-
-          <div className="title-price">
-            <div className="title-container">
-              <span className="title">{product.nome}</span>
-            </div>
-
-            {/* Simplifiquei a exibição de preço para usar apenas product.preco */}
-            <div className="price-and-discount">
-              <span className="price">
-                R$ {Number(product.preco).toFixed(2)}
-              </span>
-            </div>
-          </div>
+    <Container onClick={handleProductClick}>
+      {/* Renderização condicional baseada nos dados do produto */}
+      <h2>{product.title}</h2>
+      {product.record_fields.map((field) => (
+        <div key={field.name}>
+          <strong>{field.name}:</strong> {field.value}
         </div>
-      </a>
+      ))}
     </Container>
   );
 }
