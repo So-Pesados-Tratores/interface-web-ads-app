@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios"; // Importe o Axios para fazer a solicitação HTTP
 import { useRouter } from "next/router";
 import api from "../services/api"; // Ajuste o caminho conforme necessário
 

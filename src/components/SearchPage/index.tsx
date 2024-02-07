@@ -87,7 +87,7 @@ export default function SearchPage() {
 
       <PageLayout>
         <Container>
-          <div className="filter-row">
+         {/* <div className="filter-row">
             <p>Filtrar por:&nbsp;</p>
             <select
               id="filter"
@@ -99,7 +99,7 @@ export default function SearchPage() {
               <option value="lowest-price">Menor Preço</option>
               <option value="biggest-price">Maior Preço</option>
             </select>
-          </div>
+           </div> */}
 
           {getIsFetching && <LoadingModal spinnerSize="10rem" />}
 

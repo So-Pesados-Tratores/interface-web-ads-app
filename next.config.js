@@ -1,23 +1,8 @@
-/*eslint no-undef: "off"*/
-
-const withPWA = require("next-pwa");
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  env: {
-    SITE_DOMAIN: process.env.SITE_DOMAIN || "https://sopesadostratores.com/",
+  compiler: {
+    styledComponents: true,
   },
+}
 
-  pwa: {
-    dest: "public",
-  },
-
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      require("./src/utils/generateSiteMap");
-    }
-
-    return config;
-  },
-};
-
-module.exports = withPWA(nextConfig);
+module.exports = nextConfig
