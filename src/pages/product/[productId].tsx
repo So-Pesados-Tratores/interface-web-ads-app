@@ -30,8 +30,8 @@ interface IProps {
 export const getStaticPaths: GetStaticPaths = async () => {
   const query = `{"query": "{ table_records(table_id: 303926833) { edges { node { id record_fields { name value } } } } }"}`;
   try {
-    console.log("Query enviada:", query);
-    console.log("Headers:", api.defaults.headers);
+    // console.log("Query enviada:", query);
+    // console.log("Headers:", api.defaults.headers);
 
     const response = await api.post(
       "",
@@ -39,10 +39,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
         query: `{ table_records(table_id: 303926833) { edges { node { id record_fields { name value } } } } }`,
       })
     );
-    console.log(
-      "Resposta da API GetStaticPaths: ",
-      response.data.data.table_records.edges
-    );
+    // console.log(
+    //   "Resposta da API GetStaticPaths: ",
+    //   response.data.data.table_records.edges
+    // );
     if (!response.data.data || !response.data.data.table_records) {
       console.error("Dados de table_records não encontrados:", response);
       return { paths: [], fallback: "blocking" };
@@ -60,7 +60,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const productId = params?.productId;
-  console.log("Matheus: ", productId);
+  // console.log("Matheus: ", productId);
 
   // Certifique-se de que a query está corretamente formatada para GraphQL.
   const query = JSON.stringify({
@@ -77,10 +77,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     const response = await api.post("", query);
-    console.log(
-      "Resposta da API getStaticProps: ",
-      response.data.data.table_record
-    );
+    // console.log(
+    //   "Resposta da API getStaticProps: ",
+    //   response.data.data.table_record
+    // );
 
     // Verifique se a resposta da API contém os dados esperados
     if (response.data.data && response.data.data.table_record) {
