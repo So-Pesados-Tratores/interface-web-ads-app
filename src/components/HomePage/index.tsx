@@ -11,10 +11,9 @@ const HomePage: React.FC<HomePageProps> = ({ products }) => {
   return (
     <PageLayout>
       <div>
-        {products.map((product) => {
-          console.log(product);
-          product ? <ProductCard key={product.id} iProduct={product} /> : null;
-        })}
+        {products.map((product) => (
+          <ProductCard key={product.id} iProduct={product} />
+        ))}
       </div>
     </PageLayout>
   );
