@@ -29,12 +29,6 @@ export default function ImageSlider({ images }: IProps) {
     }
   }
 
-  /*const customRenderThumb = (children) => children.map( (item, index) => (
-		<div key={index} className="thumb-container">
-			<img src={item.props.src} alt={item.props.alt} /> 
-		</div>
-    ));*/
-
   return (
     <Container>
       {modalActiveIndex !== null && (
