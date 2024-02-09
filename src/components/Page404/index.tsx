@@ -1,8 +1,6 @@
 import React from "react";
 import Head from "next/head";
 
-import PageLayout from "../PageLayout";
-
 import { Container } from "./styles";
 
 export default function Page404() {

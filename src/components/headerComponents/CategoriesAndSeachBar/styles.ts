@@ -5,7 +5,7 @@ export const Container = styled.nav`
     width: 100%;
     height: auto; /* Ajusta a altura automaticamente */
     padding: 2rem 0; /* Espaço vertical dentro do container */
-    background: url('/images/backgroundHeader.jpg') no-repeat center center;
+    background: url('/images/backgroundHeader.png') no-repeat center center;
     background-size: cover; /* A imagem de fundo cobre todo o espaço do cabeçalho */
 
     div.limit-center {

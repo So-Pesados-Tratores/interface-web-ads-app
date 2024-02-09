@@ -28,7 +28,6 @@ interface IProps {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const query = `{"query": "{ table_records(table_id: 303926833) { edges { node { id record_fields { name value } } } } }"}`;
   try {
     // console.log("Query enviada:", query);
     // console.log("Headers:", api.defaults.headers);

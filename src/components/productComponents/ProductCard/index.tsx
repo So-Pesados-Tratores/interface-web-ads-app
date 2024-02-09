@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Container } from "./styles";
 import { IProduct } from "../../../pages/product/[productId]";
+import formatarMoedaReal from "../../../utils/currency";
 
 interface IProps {
   iProduct: IProduct;
@@ -27,7 +28,7 @@ const ProductCard: React.FC<IProps> = ({ iProduct }) => {
       <h2>{iProduct.nome}</h2>
 
       <div>
-        <strong>Preço:</strong> {iProduct.preco}
+        <strong>Preço:</strong> {formatarMoedaReal(iProduct.preco)}
       </div>
 
       <div>
