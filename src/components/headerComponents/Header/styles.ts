@@ -22,13 +22,13 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         img {
-            height: 5rem; // Ajuste conforme necessário para o logo
+            height: 0.025rem; // Ajuste conforme necessário para o logo
             width: auto; // Mantém a proporção do logo
         }
     }
 
     // Seção Comprar e Categorias
-    .buy-section, .category-dropdown {
+    .category-dropdown {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -38,7 +38,7 @@ export const Container = styled.div`
     // Ajustes para links e botões para garantir a cor do texto e outros estilos
     a, button {
         color: #FFF; // Cor da fonte
-        // Adicione qualquer outro estilo necessário
+        text-decoration: none;
     }
 `;
 
@@ -74,8 +74,6 @@ export const SearchBarForm = styled.form<{ isActive?: boolean }>`
 `;
 
 export const CategoryDropdownMenu = styled.div`
-    margin-top: 0.5rem; // Ajuste conforme necessário
-
     ul {
         list-style: none;
         z-index: 10;

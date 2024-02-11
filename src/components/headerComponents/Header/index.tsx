@@ -72,19 +72,13 @@ export default function Header() {
               </a>
             </Link>
 
-            {/* Seção "Comprar" */}
-            <div className="buy-section">
-              <Link href="/comprar">
-                <a>Comprar</a>
-              </Link>
-            </div>
-
             {/* {getMobileMenuActive && (
               <MobileMenu
                 setMobileMenuActive={setMobileMenuActive}
                 searchBar={renderSearchBar}
               />
             )} */}
+
             <div className="limit-center">
               <div className="category-and-searchbar">
                 {renderCategoryDropdown()}
