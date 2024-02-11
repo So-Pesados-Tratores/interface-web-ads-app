@@ -6,8 +6,8 @@ import { IProduct } from "../../../pages/product/[productId]";
 import {
   Container,
   InterestButton,
-  ProductInfo,
-  ProductSection,
+  ProductDetails,
+  SliderContainer,
 } from "./styles";
 
 interface IProps {
@@ -28,33 +28,28 @@ const ProductPage: React.FC<IProps> = ({ product }) => {
       </Head>
       <PageLayout>
         <Container>
-          <h1>{product.nome}</h1>
-          <div className="img-slider-container">
+          <SliderContainer>
             <ImageSlider images={product.imagens.map((url) => ({ url }))} />
-          </div>
-          <ProductInfo>
-            <ProductSection>
-              <h2>Descrição</h2>
-              <p>{product.descricao}</p>
-            </ProductSection>
-            <ProductSection>
-              <h2>Categoria</h2>
-              <p>{product.categoria}</p>
-            </ProductSection>
-            <ProductSection>
-              <h2>Horas Trabalhadas</h2>
-              <p>{product.horas_trabalhadas}</p>
-            </ProductSection>
-            <ProductSection>
-              <h2>Preço</h2>
-              <p>R$ {product.preco}</p>
-            </ProductSection>
-            <ProductSection>
-              <InterestButton onClick={handleInterest}>
-                Tenho Interesse
-              </InterestButton>
-            </ProductSection>
-          </ProductInfo>
+          </SliderContainer>
+          <ProductDetails>
+            <h1>{product.nome}</h1>
+
+            <h2>Descrição</h2>
+            <p>{product.descricao}</p>
+
+            <h2>Categoria</h2>
+            <p>{product.categoria}</p>
+
+            <h2>Horas Trabalhadas</h2>
+            <p>{product.horas_trabalhadas}</p>
+
+            <h2>Preço</h2>
+            <p>R$ {product.preco}</p>
+
+            <InterestButton onClick={handleInterest}>
+              Tenho Interesse
+            </InterestButton>
+          </ProductDetails>
         </Container>
       </PageLayout>
     </>

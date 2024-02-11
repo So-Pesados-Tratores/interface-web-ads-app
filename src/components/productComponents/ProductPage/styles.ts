@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
-    min-height: 50rem;
+    display: flex;
+    flex-direction: row; // Elementos lado a lado
+    align-items: flex-start; // Alinha os itens ao início
+    gap: 2rem; // Espaço entre os elementos
     padding: 1rem;
     background: #FFFFFF;
     color: #03243F;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
     h1 {
         font-size: 2rem;
@@ -55,6 +55,11 @@ export const Container = styled.section`
         padding-top: 1.25rem;
     }
 
+    @media (max-width: 768px) {
+        flex-direction: column; // Empilha os elementos em dispositivos menores
+        align-items: center;
+    }
+
     @media (max-width: 1120px) {
         display: flex;
         flex-direction: column;
@@ -74,47 +79,35 @@ export const Container = styled.section`
     }
 `;
 
-export const ProductInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  max-width: 600px; // Ajuste conforme necessário
+export const SliderContainer = styled.div`
+    flex: 1; // Ocupa 1/2 do espaço disponível
+    max-width: 600px;
 `;
 
-export const ProductSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-
-  h2 {
-    font-size: 1.2rem;
-    color: #333;
-  }
-
-  p {
-    font-size: 1rem;
-    color: #666;
-  }
+export const ProductDetails = styled.div`
+    flex: 1; // Ocupa 1/2 do espaço disponível
+    display: flex;
+    flex-direction: column;
+    // gap: 1rem;
+    max-width: 600px;
 `;
 
 export const InterestButton = styled.button`
   padding: 0.75rem 1.5rem;
-  background-color: #4CAF50; // Escolha uma cor que combine com seu design
-  color: white;
+  background-color: #03243F; // Azul escuro para o botão
+  color: #FFFFFF; // Texto branco
   font-size: 1rem;
-  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #45a049; // Um tom um pouco mais escuro para o hover
+    background-color: #9A6C55; // Marrom ao passar o mouse
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5); // Adiciona um foco visível para acessibilidade
+    box-shadow: 0 0 0 2px rgba(50, 50, 93, 0.5); // Para acessibilidade
   }
 `;
