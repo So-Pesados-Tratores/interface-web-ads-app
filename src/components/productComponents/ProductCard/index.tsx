@@ -20,7 +20,7 @@ const ProductCard: React.FC<IProps> = ({ iProduct }) => {
     <Container onClick={handleProductClick}>
       {iProduct.imagens.length > 0 && (
         <img
-          src={iProduct.imagens[0]} // Usando apenas a primeira imagem como capa
+          src={iProduct.imagens[0]} 
           alt={`Imagem do produto ${iProduct.nome}`}
         />
       )}
