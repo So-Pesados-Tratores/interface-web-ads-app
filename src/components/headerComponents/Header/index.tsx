@@ -1,15 +1,15 @@
 import React, { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FaCaretDown, FaCaretRight, FaSearch } from "react-icons/fa";
+import { FaBars, FaCaretDown, FaCaretRight, FaSearch } from "react-icons/fa";
 import ClickAwayListener from "react-click-away-listener";
 import { useFilterBar } from "../../../contexts/filterBarContext";
-// import MobileMenu from "../MobileMenu";
+import MobileMenu from "../MobileMenu";
 import { Container, CategoryDropdownMenu, SearchBarForm } from "./styles";
 
 export default function Header() {
   const [getActiveCategoryMenu, setActiveCategoryMenu] = useState(false);
-  // const [getMobileMenuActive, setMobileMenuActive] = useState(false);
+  const [getMobileMenuActive, setMobileMenuActive] = useState(false);
   const { getCategories, getSearchBarText, setSearchBarText } = useFilterBar();
   const router = useRouter();
 
@@ -67,29 +67,33 @@ export default function Header() {
         <header>
           <div className="limit-center">
             <Link href="/">
-              <a>
+              <a className="logo">
                 <img src="/images/logo192x.png" alt="logo" title="Home" />
               </a>
             </Link>
 
-            {/* {getMobileMenuActive && (
+            <h1 className="title">
+              Encontre todos os equipamentos agrícolas e máquinas pesadas que
+              você precisa
+            </h1>
+
+            {renderSearchBar()}
+
+            <div className="mobile-menu">
+              <button onClick={() => setMobileMenuActive(true)}>
+                <FaBars size={30} />
+              </button>
+            </div>
+          </div>
+
+          <div className="category-dropdown">
+            {renderCategoryDropdown()}
+            {getMobileMenuActive && (
               <MobileMenu
                 setMobileMenuActive={setMobileMenuActive}
                 searchBar={renderSearchBar}
               />
-            )} */}
-
-            <div className="limit-center">
-              <div className="category-and-searchbar">
-                {renderCategoryDropdown()}
-                {renderSearchBar()}
-              </div>
-              {/* <div className="mobile-menu">
-                <button onClick={() => setMobileMenuActive(true)}>
-                  <FaBars size={30} />
-                </button>
-              </div> */}
-            </div>
+            )}
           </div>
         </header>
       </Container>

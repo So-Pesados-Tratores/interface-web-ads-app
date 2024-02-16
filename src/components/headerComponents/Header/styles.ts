@@ -3,27 +3,37 @@ import styled from 'styled-components';
 export const Container = styled.div`
     header {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        height: 6.25rem; // Altura do header
-        background: #03243F; // Cor de fundo do header
-        padding: 0 1rem; // Padding horizontal
+        height: 30rem; // Altura aumentada do header
+        background-image: url('/images/backgroundHeader.png'); // Certifique-se de que o caminho está correto
+        background-size: cover;
+        background-position: center;
+        padding: 0; // Removido o padding horizontal
+        position: relative;
+        width: 100%; // Garante que ocupa toda a largura
+        margin: 0 auto; // Remove margens horizontais
     }
 
-    div.limit-center {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    h1.title {
+        font-size: 2.5rem; // Tamanho da fonte do título
+        color: #FFFFFF; // Cor do texto
+        text-align: center; // Alinha o texto ao centro
+        margin: 1rem 0; // Espaçamento acima e abaixo do título
+    }
+
+    .limit-center {
         width: 100%; // Ocupa toda a largura disponível
     }
 
-    // Logo
     a.logo {
-        display: flex;
-        align-items: center;
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
         img {
-            height: 0.025rem; // Ajuste conforme necessário para o logo
-            width: auto; // Mantém a proporção do logo
+        height: 150px; // Tamanho da logo ajustado
+        width: auto; // Mantém proporção da imagem
         }
     }
 
@@ -40,24 +50,52 @@ export const Container = styled.div`
         color: #FFF; // Cor da fonte
         text-decoration: none;
     }
+
+    @media (max-width: 768px) {
+        .mobile-menu {
+            display: block;
+        }
+
+        .category-and-searchbar, .logo, .title {
+            display: none;
+        }
+
+        // Estilos para a barra de pesquisa na versão móvel
+        SearchBarForm {
+            width: 80%;
+            margin: auto;
+        }
+    }
+
+    // Estilos para telas maiores que 768px
+    @media (min-width: 769px) {
+        .mobile-menu {
+            display: none;
+        }
+
+        .category-and-searchbar, .logo, .title {
+            display: flex;
+        }
+    }
 `;
 
 
 export const SearchBarForm = styled.form<{ isActive?: boolean }>`
     display: flex;
     align-items: center;
+    justify-content: center; // Centraliza a barra de pesquisa horizontalmente
     background-color: ${({ isActive }) => (isActive ? 'lightgrey' : 'white')};
-    width: auto; // Ajusta a largura conforme necessário, ou use 100% se quiser que ocupe todo o espaço disponível
-    margin: 0; // Ajusta conforme necessário
+    width: 50%; // Ajuste para 50% da largura do header ou conforme necessário
+    margin: auto; // Centraliza a barra de pesquisa verticalmente e horizontalmente
 
     input {
-        flex: 1; // Permite que o input ocupe a maior parte do espaço
+        flex: 1; // O input ocupa todo o espaço disponível exceto o botão
         height: 40px; // Ajusta conforme necessário
         padding: 0 10px;
         border: 2px solid #03243F;
         border-right: none; // Remove a borda direita para se conectar visualmente com o botão
         border-radius: 5px 0 0 5px; // Arredonda os cantos esquerdos
-        color: #FFF; // Define a cor do texto dentro da caixa de texto
+        color: #03243F; // Cor do texto
     }
 
     button {
@@ -66,14 +104,39 @@ export const SearchBarForm = styled.form<{ isActive?: boolean }>`
         background-color: #9A6C55; // Cor de fundo do botão
         border: 2px solid #03243F; // Cor da borda
         border-radius: 0 5px 5px 0; // Arredonda os cantos direitos
-        color: #FFF; // Define a cor do ícone/texto dentro do botão
+        color: #FFF; // Cor do ícone/texto dentro do botão
         display: flex;
         justify-content: center;
         align-items: center;
     }
+
+    @media (max-width: 768px) {
+        SearchBarForm {
+            width: 80%; // Ocupa mais espaço em telas menores
+        }
+    }
 `;
 
 export const CategoryDropdownMenu = styled.div`
+    justify-content: space-around; /* Espalha os itens uniformemente */
+    padding: 0.5rem 0; /* Ajuste conforme necessário */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para as categorias */
+
+    .category-dropdown li {
+        display: inline-block; /* Muda para inline-block para que fiquem em linha */
+        margin: 0 1rem; /* Ajuste conforme necessário */
+        padding: 0.5rem 1rem; /* Ajuste conforme necessário */
+        border-radius: 0.25rem; /* Bordas arredondadas */
+        background-color: transparent; /* Remove o fundo sólido */
+        color: #FFF; /* Texto branco */
+        text-transform: uppercase; /* Opcional: texto em maiúsculas */
+        font-weight: bold; /* Opcional: texto em negrito */
+    }
+
+    .category-dropdown li:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* Fundo mais claro ao passar o mouse */
+    }
+
     ul {
         list-style: none;
         z-index: 10;
@@ -135,3 +198,4 @@ export const CategoryDropdownMenu = styled.div`
 
 
 `;
+
