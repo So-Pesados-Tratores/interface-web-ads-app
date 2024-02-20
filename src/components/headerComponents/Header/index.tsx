@@ -65,19 +65,30 @@ export default function Header() {
     <>
       <Container>
         <header>
-          <div className="limit-center">
-            <Link href="/">
-              <a className="logo">
-                <img src="/images/logo192x.png" alt="logo" title="Home" />
-              </a>
-            </Link>
+          <h1
+            className="title"
+            style={{ display: getMobileMenuActive ? "none" : "block" }}
+          >
+            Encontre todos os equipamentos agrícolas e máquinas pesadas que você
+            precisa
+          </h1>
 
-            <h1 className="title">
-              Encontre todos os equipamentos agrícolas e máquinas pesadas que
-              você precisa
-            </h1>
+          {/* Envolve todos os elementos, exceto o título, para controle de visibilidade */}
+          <div style={{ display: getMobileMenuActive ? "none" : "block" }}>
+            <div className="limit-center">
+              <Link href="/">
+                <a className="logo">
+                  <img src="/images/logo192x.png" alt="logo" title="Home" />
+                </a>
+              </Link>
 
-            {renderSearchBar()}
+              {/* Agora o searchBar também é condicionalmente ocultado baseado no getMobileMenuActive */}
+              {getMobileMenuActive ? null : renderSearchBar()}
+
+              <div className="category-dropdown">
+                {renderCategoryDropdown()}
+              </div>
+            </div>
 
             <div className="mobile-menu">
               <button onClick={() => setMobileMenuActive(true)}>
@@ -85,18 +96,16 @@ export default function Header() {
               </button>
             </div>
           </div>
-
-          <div className="category-dropdown">
-            {renderCategoryDropdown()}
-            {getMobileMenuActive && (
-              <MobileMenu
-                setMobileMenuActive={setMobileMenuActive}
-                searchBar={renderSearchBar}
-              />
-            )}
-          </div>
         </header>
       </Container>
+
+      {getMobileMenuActive && (
+        <MobileMenu
+          setMobileMenuActive={setMobileMenuActive}
+          searchBar={renderSearchBar}
+          // Aqui você pode passar outros elementos ou dados para o MobileMenu conforme necessário
+        />
+      )}
     </>
   );
 }

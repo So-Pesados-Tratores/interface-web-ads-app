@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    position: fixed;
+
+    position: fixed; // Isso fará com que o menu fique fixo na tela
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100%;
-    min-height: 100vh;
-    z-index: 100;
-    overflow-y: auto;
+    right: 0; // Combinando left: 0 e right: 0 para estender por toda a largura
+    height: 100vh; // Faz o menu cobrir a altura total da tela
+    z-index: 1000; // Garante que o menu fique acima de outros conteúdos
+    background-color: rgba(0, 0, 0, 0.9); // Exemplo de cor de fundo
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; // Permite rolagem se o conteúdo exceder a altura da telas
 
-    background: rgba(1, 1, 1, 0.9);
-
+    div.menu-body h1 {
+        color: #FFF; /* Exemplo: texto branco */
+        text-align: center;
+        padding: 20px;
+    }
 
     div.menu-header {
         height: 3.125rem;
@@ -91,5 +97,12 @@ export const Container = styled.div`
         &::-webkit-details-marker {
             display: none;
         }
+    }
+
+    transform: translateX(0); // Menu visível
+    transition: transform 0.3s ease;
+
+    &.hidden {
+        transform: translateX(-100%); // Esconde o menu fora da tela
     }
 `;

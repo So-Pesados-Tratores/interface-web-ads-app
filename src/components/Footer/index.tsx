@@ -28,46 +28,46 @@ const Footer: React.FC = () => {
 
   return (
     <>
-      <NewsletterSection>
-        <Logo src="/images/logo.png" alt="Logo" />
-        <NewsletterContent>
+      {/* <NewsletterSection> */}
+      {/* <Logo src="/images/logo.png" alt="Logo" /> */}
+      {/* <NewsletterContent>
           <NewsletterText>Receba novidades</NewsletterText>
           <NewsletterForm onSubmit={handleNewsletterSubmit}>
             <Input type="email" placeholder="Digite seu e-mail" required />
             <SubmitButton type="submit">Enviar</SubmitButton>
           </NewsletterForm>
-        </NewsletterContent>
-      </NewsletterSection>
+        </NewsletterContent> */}
+      {/* </NewsletterSection> */}
 
-      <MiddleSection>
-        <Column>
+      {/* <MiddleSection> */}
+      {/* <Column>
           <ColumnTitle>Sobre nós</ColumnTitle>
           <ColumnLink href="#">Quem somos</ColumnLink>
           <ColumnLink href="#">Nossa história</ColumnLink>
-        </Column>
+        </Column> */}
 
-        <Column>
+      {/* <Column>
           <ColumnTitle>Contate-nos</ColumnTitle>
           <ColumnLink href="#">Suporte</ColumnLink>
           <ColumnLink href="#">Atendimento</ColumnLink>
-        </Column>
+        </Column> */}
 
-        <Column>
+      {/* <Column>
           <ColumnTitle>Comprar</ColumnTitle>
           <ColumnLink href="#">Produtos</ColumnLink>
           <ColumnLink href="#">Promoções</ColumnLink>
-        </Column>
+        </Column> */}
 
-        <Column>
+      {/* <Column>
           <ColumnTitle>Anuncie aqui</ColumnTitle>
           <ColumnLink href="#">Publicidade</ColumnLink>
           <ColumnLink href="#">Parcerias</ColumnLink>
-        </Column>
+        </Column> */}
 
-        {/* Aqui você pode adicionar a logo e outros elementos conforme necessário */}
-      </MiddleSection>
+      {/* Aqui você pode adicionar a logo e outros elementos conforme necessário */}
+      {/* </MiddleSection> */}
       <FooterContainer>
-        <SocialMediaIcons>
+        {/* <SocialMediaIcons>
           <SocialIconLink href="https://www.instagram.com" target="_blank">
             <i className="fab fa-instagram"></i>
           </SocialIconLink>
@@ -77,7 +77,9 @@ const Footer: React.FC = () => {
           <SocialIconLink href="https://www.linkedin.com" target="_blank">
             <i className="fab fa-linkedin-in"></i>
           </SocialIconLink>
-        </SocialMediaIcons>
+        </SocialMediaIcons> */}
+
+        <Logo src="/images/logo.png" alt="Logo" />
 
         <LegalLinks>
           <LegalLink href="/termos-de-uso">Termos de Uso</LegalLink>

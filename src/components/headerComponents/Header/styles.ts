@@ -5,44 +5,66 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-between;
-        height: 30rem; // Altura aumentada do header
-        background-image: url('/images/backgroundHeader.png'); // Certifique-se de que o caminho está correto
+        justify-content: center;
+        height: 30rem;
+        background-image: url('/images/backgroundHeader.png');
         background-size: cover;
         background-position: center;
-        padding: 0; // Removido o padding horizontal
+        padding: 0;
         position: relative;
-        width: 100%; // Garante que ocupa toda a largura
-        margin: 0 auto; // Remove margens horizontais
+        width: 100%;
+        margin: 0 auto;
     }
 
-    h1.title {
-        font-size: 2.5rem; // Tamanho da fonte do título
-        color: #FFFFFF; // Cor do texto
-        text-align: center; // Alinha o texto ao centro
-        margin: 1rem 0; // Espaçamento acima e abaixo do título
+    .mobile-menu {
+        display: none; /* Esconde por padrão */
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 1rem;
+        z-index: 200; /* Certifique-se de que esteja acima de outros elementos */
+        
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
     }
 
     .limit-center {
-        width: 100%; // Ocupa toda a largura disponível
+        display: flex;
+        flex-direction: column; // Organiza o conteúdo em coluna para o alinhamento correto
+        align-items: center; // Centraliza os elementos filhos horizontalmente
+        justify-content: space-between; // Distribui o espaço verticalmente
+        width: 100%;
+        max-width: 1200px; // Define uma largura máxima para o conteúdo central
+        margin: 0 auto; // Centraliza o .limit-center dentro do header
+    }
+
+    h1.title {
+        font-size: 2.0rem;
+        color: #FFFFFF;
+        text-align: center;
+        margin: 1rem 0;
+        font-family: 'Heebo', sans-serif;
     }
 
     a.logo {
         position: absolute;
-        top: 1rem;
+        top: 0;
         left: 1rem;
         img {
-        height: 150px; // Tamanho da logo ajustado
-        width: auto; // Mantém proporção da imagem
+            height: 150px;
+            width: auto;
         }
     }
 
-    // Seção Comprar e Categorias
     .category-dropdown {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-grow: 1; // Permite que os itens cresçam igualmente se necessário
+        width: 100%; // Ocupa toda a largura disponível
+        margin-top: 1rem; // Espaço acima do menu de categorias
     }
     
     // Ajustes para links e botões para garantir a cor do texto e outros estilos
@@ -53,21 +75,20 @@ export const Container = styled.div`
 
     @media (max-width: 768px) {
         .mobile-menu {
-            display: block;
+            display: flex; /* Mostra o botão do menu móvel em telas menores */
         }
 
+        /* Estilos para adaptar o layout quando o menu móvel está ativo */
         .category-and-searchbar, .logo, .title {
             display: none;
         }
 
-        // Estilos para a barra de pesquisa na versão móvel
         SearchBarForm {
             width: 80%;
             margin: auto;
         }
     }
 
-    // Estilos para telas maiores que 768px
     @media (min-width: 769px) {
         .mobile-menu {
             display: none;
@@ -83,14 +104,19 @@ export const Container = styled.div`
 export const SearchBarForm = styled.form<{ isActive?: boolean }>`
     display: flex;
     align-items: center;
-    justify-content: center; // Centraliza a barra de pesquisa horizontalmente
-    background-color: ${({ isActive }) => (isActive ? 'lightgrey' : 'white')};
-    width: 50%; // Ajuste para 50% da largura do header ou conforme necessário
+    justify-content: center;
+    width: 90%; // Aumentando a largura do searchBar
+    max-width: 1200px; // Aumentando o limite máximo da largura para telas maiores
     margin: auto; // Centraliza a barra de pesquisa verticalmente e horizontalmente
+
+    @media (max-width: 768px) {
+        display: none; // Continua a ocultar o searchBar em telas menores
+    }
 
     input {
         flex: 1; // O input ocupa todo o espaço disponível exceto o botão
         height: 40px; // Ajusta conforme necessário
+        width: 400px;
         padding: 0 10px;
         border: 2px solid #03243F;
         border-right: none; // Remove a borda direita para se conectar visualmente com o botão
@@ -111,16 +137,12 @@ export const SearchBarForm = styled.form<{ isActive?: boolean }>`
     }
 
     @media (max-width: 768px) {
-        SearchBarForm {
-            width: 80%; // Ocupa mais espaço em telas menores
-        }
+        display: none;
     }
 `;
 
 export const CategoryDropdownMenu = styled.div`
     justify-content: space-around; /* Espalha os itens uniformemente */
-    padding: 0.5rem 0; /* Ajuste conforme necessário */
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para as categorias */
 
     .category-dropdown li {
         display: inline-block; /* Muda para inline-block para que fiquem em linha */
@@ -196,6 +218,8 @@ export const CategoryDropdownMenu = styled.div`
         display: block;
     }
 
-
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 

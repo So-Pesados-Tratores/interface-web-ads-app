@@ -1,9 +1,10 @@
 import React from "react";
-import { FaTimes } from "react-icons/fa";
 import Link from "next/link";
+import { FaTimes } from "react-icons/fa";
 
 import { Container } from "./styles";
-import { useFilterBar } from "../../../contexts/filterBarContext";
+// Certifique-se de que CategoryDropdownMenu é importado corretamente como um componente
+import { CategoryDropdownMenu } from "../Header/styles";
 
 interface IProps {
   setMobileMenuActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,24 +12,14 @@ interface IProps {
 }
 
 export default function MobileMenu({ setMobileMenuActive, searchBar }: IProps) {
-  const { getCategories } = useFilterBar();
-
-  const categoryList = () => (
-    <div className="category-menu">
-      {getCategories.map((category) => (
-        <Link
-          key={category.id}
-          href={`/search?categoryId=${category.id}&category=${category.name}`}
-        >
-          <a onClick={() => setMobileMenuActive(false)}>{category.name}</a>
-        </Link>
-      ))}
-    </div>
-  );
-
   return (
     <Container>
       <div className="menu-header">
+        <Link href="/">
+          <a className="logo" onClick={() => setMobileMenuActive(false)}>
+            <img src="/images/logo192x.png" alt="logo" title="Home" />
+          </a>
+        </Link>
         <button
           id="exit-mobile-menu"
           data-testid="exit-mobile-menu"
@@ -38,10 +29,10 @@ export default function MobileMenu({ setMobileMenuActive, searchBar }: IProps) {
           <FaTimes size={40} />
         </button>
       </div>
-
       <div className="menu-body">
+        <h1>Menu</h1>
         {searchBar()}
-        {categoryList()}
+        <CategoryDropdownMenu /> {/* Corrigido para uso como componente */}
       </div>
     </Container>
   );

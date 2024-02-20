@@ -11,7 +11,7 @@ export const NewsletterSection = styled.section`
 
 export const Logo = styled.img`
   margin-left: 20px; // Ajuste conforme necessário
-  max-height: 50px; // Ajuste o tamanho conforme necessário
+  max-height: 150px; // Ajuste o tamanho conforme necessário
 `;
 
 export const NewsletterForm = styled.form`
