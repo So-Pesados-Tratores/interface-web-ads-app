@@ -19,7 +19,7 @@ export const Container = styled.div`
         width: fit-content;
         height: fit-content;
 
-        background: transparent;
+        background: gray;
         border: 0;
 
         cursor: pointer;

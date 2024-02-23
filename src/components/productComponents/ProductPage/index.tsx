@@ -77,7 +77,14 @@ const handleInterest = async (productId, productName) => {
   }
 };
 
+function formatDescription(description: string): string[] {
+  const lines = description.split("✅").filter((line) => line.trim() !== "");
+  return lines.map((line) => `✅${line.trim()}`);
+}
+
 const ProductPage: React.FC<IProps> = ({ product }) => {
+  const formattedDescription = formatDescription(product.descricao);
+
   return (
     <>
       <Head>
@@ -93,7 +100,10 @@ const ProductPage: React.FC<IProps> = ({ product }) => {
             <h1>{product.nome}</h1>
 
             <h2>Descrição</h2>
-            <p>{product.descricao}</p>
+            {/* Renderiza a descrição formatada como uma lista de parágrafos */}
+            {formattedDescription.map((line, index) => (
+              <p key={index}>{line}</p>
+            ))}
 
             <h2>Categoria</h2>
             <p>{product.categoria}</p>
