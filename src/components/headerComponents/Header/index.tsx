@@ -82,7 +82,6 @@ export default function Header() {
                 </a>
               </Link>
 
-              {/* Agora o searchBar também é condicionalmente ocultado baseado no getMobileMenuActive */}
               {getMobileMenuActive ? null : renderSearchBar()}
 
               <div className="category-dropdown">
@@ -103,7 +102,7 @@ export default function Header() {
         <MobileMenu
           setMobileMenuActive={setMobileMenuActive}
           searchBar={renderSearchBar}
-          // Aqui você pode passar outros elementos ou dados para o MobileMenu conforme necessário
+          renderCategoryDropdown={renderCategoryDropdown}
         />
       )}
     </>

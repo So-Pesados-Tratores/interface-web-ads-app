@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Cookies from "js-cookie";
 import HomePage from "../components/HomePage";
 import { GetStaticProps } from "next";
 import { IProduct } from "./product/[productId]";
@@ -80,6 +81,21 @@ function findField(fields: any[], fieldName: string): string {
 }
 
 const Home: React.FC<HomeProps> = ({ products }) => {
+  useEffect(() => {
+    // Verificar se um cookie específico existe
+    const somePreference = Cookies.get("somePreference");
+
+    if (!somePreference) {
+      // Definir um cookie se ele não existir
+      Cookies.set("somePreference", "yourValue", {
+        expires: 7,
+        sameSite: "Strict",
+      });
+    }
+
+    // Você também pode atualizar o estado do componente com base nos cookies, etc.
+  }, []);
+
   return <HomePage products={products} />;
 };
 

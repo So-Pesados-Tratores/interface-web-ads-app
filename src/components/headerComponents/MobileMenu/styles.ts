@@ -1,108 +1,42 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-
-    position: fixed; // Isso fará com que o menu fique fixo na tela
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0; // Combinando left: 0 e right: 0 para estender por toda a largura
-    height: 100vh; // Faz o menu cobrir a altura total da tela
-    z-index: 1000; // Garante que o menu fique acima de outros conteúdos
-    background-color: rgba(0, 0, 0, 0.9); // Exemplo de cor de fundo
+    right: 0;
+    bottom: 0;
+    z-index: 1000; // Certifique-se de que o menu sobreponha outros conteúdos
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
-    overflow-y: auto; // Permite rolagem se o conteúdo exceder a altura da telas
+    align-items: center;
+    overflow-y: auto;
 
-    div.menu-body h1 {
-        color: #FFF; /* Exemplo: texto branco */
-        text-align: center;
-        padding: 20px;
-    }
-
-    div.menu-header {
-        height: 3.125rem;
+    .menu-header {
+        width: 100%;
+        padding: 1rem;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        justify-content: flex-end;
     }
 
-
-    div.user-login,
-    div.user-menu {
-        height: 100%;
-
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-
-    div.user-login div.user-menu {
-        width: 15.625rem;
-    }
-
-    div.menu-header button {
-        width: fit-content;
-        font-size: 1.25rem;
-        font-weight: bold;
-
-        border: 0;
-        background: transparent;
-        color: #eee;
-        cursor: pointer;
-
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-
-    div.menu-header button.login {
-        margin-left: 0.625rem;
-    }
-
-    div.menu-header button.login span {
-        margin-left: 0.3125rem;
-    }
-
-    div.menu-header button#exit-mobile-menu {
-        width: 3.125rem;
-    }
-
-    div.menu-body {
+    .menu-body {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-    }
-
-    div.menu-body > * {
-        margin-top: 3.125rem;
-    }
-
-    div.category-menu {
         width: 100%;
-        max-width: 25rem;
     }
 
-    details {
-        margin-left: 1.25rem;
-        padding: 0.25rem;
-        cursor: pointer;
-        color: #eee;
+    // Estilize o botão de categorias conforme necessário
+    button {
+        margin: 20px 0; // Exemplo de espaçamento
+        // Adicione mais estilos aqui
     }
 
-    details summary.last-child {
-        list-style: none;
-        list-style-type: none;
-
-        &::-webkit-details-marker {
-            display: none;
-        }
-    }
-
-    transform: translateX(0); // Menu visível
-    transition: transform 0.3s ease;
-
-    &.hidden {
-        transform: translateX(-100%); // Esconde o menu fora da tela
+    // Estilos para a logo
+    a img {
+        max-width: 120px;
+        margin: 20px 0;
     }
 `;
+

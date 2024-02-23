@@ -74,28 +74,33 @@ export const Container = styled.div`
     }
 
     @media (max-width: 768px) {
+        /* Ajustes para o botão do menu móvel para garantir sua visibilidade */
         .mobile-menu {
-            display: flex; /* Mostra o botão do menu móvel em telas menores */
+            display: flex; /* Garante que o botão do menu seja visível em telas pequenas */
         }
 
-        /* Estilos para adaptar o layout quando o menu móvel está ativo */
-        .category-and-searchbar, .logo, .title {
+        /* Oculta elementos que não devem ser exibidos quando o menu móvel está ativo */
+        .category-dropdown, .search-bar, .logo, .title, .limit-center {
             display: none;
-        }
-
-        SearchBarForm {
-            width: 80%;
-            margin: auto;
         }
     }
 
-    @media (min-width: 769px) {
-        .mobile-menu {
-            display: none;
+    /* Quando o menu móvel está ativo, estes estilos sobrescrevem os padrões para adaptar o layout */
+    .mobile-menu-active {
+        display: block; /* Exibe o container do menu móvel */
+
+        .menu-header, .menu-body {
+            display: flex; /* Garante que o cabeçalho e o corpo do menu sejam exibidos */
         }
 
-        .category-and-searchbar, .logo, .title {
-            display: flex;
+        .logo, .search-bar, .category-dropdown {
+            display: block; /* Garante a visibilidade dos elementos dentro do menu móvel */
+        }
+
+        /* Adaptação específica para o searchBar e dropdown dentro do menu móvel */
+        .search-bar, .category-dropdown {
+            width: 100%; /* Ajusta a largura para preencher o menu móvel */
+            padding: 0 20px; /* Adiciona um pouco de padding para não colar nas bordas */
         }
     }
 `;
@@ -108,10 +113,6 @@ export const SearchBarForm = styled.form<{ isActive?: boolean }>`
     width: 90%; // Aumentando a largura do searchBar
     max-width: 1200px; // Aumentando o limite máximo da largura para telas maiores
     margin: auto; // Centraliza a barra de pesquisa verticalmente e horizontalmente
-
-    @media (max-width: 768px) {
-        display: none; // Continua a ocultar o searchBar em telas menores
-    }
 
     input {
         flex: 1; // O input ocupa todo o espaço disponível exceto o botão
@@ -137,7 +138,10 @@ export const SearchBarForm = styled.form<{ isActive?: boolean }>`
     }
 
     @media (max-width: 768px) {
-        display: none;
+        /* Exibe o searchBar dentro do menu móvel */
+        display: flex; /* Sobrescreve a regra de ocultação anterior */
+        width: 80%; /* Ajusta a largura para caber dentro do menu móvel */
+        margin: 10px auto; /* Centraliza e adiciona uma pequena margem */
     }
 `;
 
@@ -219,7 +223,16 @@ export const CategoryDropdownMenu = styled.div`
     }
 
     @media (max-width: 768px) {
-        display: none;
+        /* Estilos para exibir o dropdown de categorias dentro do menu móvel */
+        display: flex; /* Torna o dropdown visível dentro do menu móvel */
+        flex-direction: column; /* Opcional: Ajusta o layout para uma visualização melhor */
+        width: 100%; /* Ajusta a largura para usar todo o espaço disponível */
+        padding: 10px; /* Adiciona padding para separar os itens das bordas */
     }
+`;
+
+export const MobileMenuContainer = styled.div`
+    /* Adicione aqui os estilos para o container do MobileMenu, se necessário */
+    /* Certifique-se de que este container esteja configurado para cobrir a tela inteira em dispositivos móveis */
 `;
 
