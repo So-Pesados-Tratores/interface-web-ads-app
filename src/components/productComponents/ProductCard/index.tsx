@@ -16,11 +16,17 @@ const ProductCard: React.FC<IProps> = ({ iProduct }) => {
     router.push(href);
   }
 
+  // Modifique a URL da imagem para passar pelo proxy
+  const proxyImageUrl =
+    iProduct.imagens.length > 0
+      ? `/api/image-proxy?url=${encodeURIComponent(iProduct.imagens[0])}`
+      : "";
+
   return (
     <Container onClick={handleProductClick}>
       {iProduct.imagens.length > 0 && (
         <img
-          src={iProduct.imagens[0]} 
+          src={proxyImageUrl} // Utilize a URL do proxy aqui
           alt={`Imagem do produto ${iProduct.nome}`}
         />
       )}

@@ -70,7 +70,7 @@ function transformProduct(node: any): IProduct {
     imagens: JSON.parse(findField(node.record_fields, "IMAGENS") || "[]"),
     preco: findField(node.record_fields, "PRECO"),
   };
-
+  console.log(product);
   return product;
 }
 
@@ -82,18 +82,14 @@ function findField(fields: any[], fieldName: string): string {
 
 const Home: React.FC<HomeProps> = ({ products }) => {
   useEffect(() => {
-    // Verificar se um cookie específico existe
     const somePreference = Cookies.get("somePreference");
 
     if (!somePreference) {
-      // Definir um cookie se ele não existir
       Cookies.set("somePreference", "yourValue", {
         expires: 7,
         sameSite: "Strict",
       });
     }
-
-    // Você também pode atualizar o estado do componente com base nos cookies, etc.
   }, []);
 
   return <HomePage products={products} />;
