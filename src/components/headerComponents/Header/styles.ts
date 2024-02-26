@@ -146,88 +146,32 @@ export const SearchBarForm = styled.form<{ isActive?: boolean }>`
 `;
 
 export const CategoryDropdownMenu = styled.div`
-    justify-content: space-around; /* Espalha os itens uniformemente */
+    display: flex;
+    flex-wrap: wrap; // Permite que os itens se alinhem em várias linhas conforme necessário
+    gap: 10px; // Espaço entre os botões
+    justify-content: center; // Centraliza os botões horizontalmente
+    align-items: center; // Centraliza os botões verticalmente
+    margin-top: 1rem; // Adiciona espaço acima dos botões
 
-    .category-dropdown li {
-        display: inline-block; /* Muda para inline-block para que fiquem em linha */
-        margin: 0 1rem; /* Ajuste conforme necessário */
-        padding: 0.5rem 1rem; /* Ajuste conforme necessário */
-        border-radius: 0.25rem; /* Bordas arredondadas */
-        background-color: transparent; /* Remove o fundo sólido */
-        color: #FFF; /* Texto branco */
-        text-transform: uppercase; /* Opcional: texto em maiúsculas */
-        font-weight: bold; /* Opcional: texto em negrito */
-    }
-
-    .category-dropdown li:hover {
-        background-color: rgba(255, 255, 255, 0.2); /* Fundo mais claro ao passar o mouse */
-    }
-
-    ul {
-        list-style: none;
-        z-index: 10;
-        position: relative;
-    }
-                
-    ul li { 
-        width: 12.5rem; 
-        height: 2.5rem; 
-        background: #03243F;
-        color: #FFF;
-        float: left; 
-        line-height: 2.5rem; 
-        font-size: 1.25rem;
-        text-align: center; 
-        user-select: none; 
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center; // Isso centraliza o texto vertical e horizontalmente.
-
-    }
-
-    ul li.category-menu {
-        border-radius: 0.3125rem;
-    }
-
-    ul li.category-menu.active {
-        border-radius: 0.3125rem 0.3125rem 0 0;
-        border-bottom: 1px solid ${props => props.theme.secondary};
-    }
-
-    ul li p {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    button {
+        padding: 5px 10px;
+        font-size: 14px;
+        background-color: #03243F; // Cor de fundo dos botões
+        color: #FFF; // Cor do texto
+        border: none;
+        border-radius: 20px; // Bordas arredondadas
         cursor: pointer;
-    }
-                
-    ul li:hover { 
-        background: ${props => props.theme.secondary};
+        transition: background-color 0.3s; // Animação de hover
     }
 
-    ul li:active { 
-        background: ${props => props.theme.primary};
-    }
-
-    li + li {
-        border-top: 1px solid ${props => props.theme.secondary};
-    } 
-
-    li > ul {
-        display: none;
-    }
-
-    li.active > ul {
-        display: block;
+    button:hover {
+        background-color: #9A6C55; // Cor de fundo ao passar o mouse
     }
 
     @media (max-width: 768px) {
-        /* Estilos para exibir o dropdown de categorias dentro do menu móvel */
-        display: flex; /* Torna o dropdown visível dentro do menu móvel */
-        flex-direction: column; /* Opcional: Ajusta o layout para uma visualização melhor */
-        width: 100%; /* Ajusta a largura para usar todo o espaço disponível */
-        padding: 10px; /* Adiciona padding para separar os itens das bordas */
+        justify-content: start; // Alinha os botões à esquerda em telas pequenas
+        overflow-x: auto; // Permite rolagem horizontal se houver muitos botões
+        gap: 5px; // Reduz o espaço entre os botões em telas menores
     }
 `;
 

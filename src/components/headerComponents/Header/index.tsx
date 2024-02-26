@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaBars, FaCaretDown, FaCaretRight, FaSearch } from "react-icons/fa";
@@ -6,12 +6,44 @@ import ClickAwayListener from "react-click-away-listener";
 import { useFilterBar } from "../../../contexts/filterBarContext";
 import MobileMenu from "../MobileMenu";
 import { Container, CategoryDropdownMenu, SearchBarForm } from "./styles";
+import api from "../../../services/api";
 
 export default function Header() {
   const [getActiveCategoryMenu, setActiveCategoryMenu] = useState(false);
   const [getMobileMenuActive, setMobileMenuActive] = useState(false);
-  const { getCategories, getSearchBarText, setSearchBarText } = useFilterBar();
+  const { getCategories, setCategories, getSearchBarText, setSearchBarText } =
+    useFilterBar();
   const router = useRouter();
+
+  // Função para buscar categorias
+  const fetchCategories = async () => {
+    try {
+      const response = await api.post("", {
+        query:
+          "{ table_records(table_id: 303926832) { edges { node { id record_fields { name value } } } } }",
+      });
+
+      // Transforme a resposta para o formato desejado
+      const categories = response.data.data.table_records.edges.map((edge) => ({
+        id: edge.node.id,
+        name:
+          edge.node.record_fields.find((field) => field.name === "NOME")
+            ?.value || "Categoria sem nome",
+      }));
+
+      console.log("Categorias:", categories);
+
+      // Atualize o estado com as novas categorias
+      setCategories(categories);
+    } catch (error) {
+      console.error("Erro ao buscar categorias:", error);
+      // Trate o erro conforme necessário
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   function handleSearch(event: FormEvent) {
     event.preventDefault();
@@ -24,26 +56,14 @@ export default function Header() {
 
   const renderCategoryDropdown = () => (
     <CategoryDropdownMenu>
-      <ClickAwayListener onClickAway={() => setActiveCategoryMenu(false)}>
-        <ul>
-          <li onClick={() => setActiveCategoryMenu(!getActiveCategoryMenu)}>
-            Categorias <FaCaretDown />
-            {getActiveCategoryMenu && (
-              <ul>
-                {getCategories.map((category) => (
-                  <li
-                    key={category.id}
-                    onClick={() => handleCategoryClick(category.id)}
-                  >
-                    {category.name}
-                    <FaCaretRight />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        </ul>
-      </ClickAwayListener>
+      {getCategories.map((category) => (
+        <button
+          key={category.id}
+          onClick={() => handleCategoryClick(category.id)}
+        >
+          {category.name}
+        </button>
+      ))}
     </CategoryDropdownMenu>
   );
 
