@@ -10,7 +10,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const imageResponse = await fetch(url);
+    const imageResponse = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_PIPEFY_API_TOKEN}`
+      }
+    });
+
     if (!imageResponse.ok) {
       throw new Error(`Erro ao buscar imagem: ${imageResponse.statusText}`);
     }
