@@ -14,6 +14,7 @@ export default function Header() {
   const { getCategories, setCategories, getSearchBarText, setSearchBarText } =
     useFilterBar();
   const router = useRouter();
+  const isProductPage = router.pathname.includes("/product");
 
   // Função para buscar categorias
   const fetchCategories = async () => {
@@ -83,15 +84,21 @@ export default function Header() {
 
   return (
     <>
-      <Container>
+      <Container
+        className={isProductPage ? "productPage" : ""}
+        style={{ height: isProductPage ? "20rem" : "30rem" }}
+      >
         <header>
-          <h1
-            className="title"
-            style={{ display: getMobileMenuActive ? "none" : "block" }}
-          >
-            Encontre todos os equipamentos agrícolas e máquinas pesadas que você
-            precisa
-          </h1>
+          {/* Esconde o h1 se estiver na ProductPage */}
+          {!isProductPage && (
+            <h1
+              className="title"
+              style={{ display: getMobileMenuActive ? "none" : "block" }}
+            >
+              Encontre todos os equipamentos agrícolas e máquinas pesadas que
+              você precisa
+            </h1>
+          )}
 
           {renderSearchBar()}
 

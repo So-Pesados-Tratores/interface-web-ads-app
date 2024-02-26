@@ -103,6 +103,16 @@ export const Container = styled.div`
             padding: 0 20px; /* Adiciona um pouco de padding para não colar nas bordas */
         }
     }
+
+    &.productPage {
+        header {
+        height: 20rem;
+        }
+
+        h1.title {
+        display: none;
+        }
+    }
 `;
 
 

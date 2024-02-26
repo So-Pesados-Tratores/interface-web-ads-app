@@ -27,16 +27,24 @@ export const Container = styled.div`
         width: 100%;
     }
 
-    // Estilize o botão de categorias conforme necessário
-    button {
-        margin: 20px 0; // Exemplo de espaçamento
-        // Adicione mais estilos aqui
+    // Aumentar o tamanho da logo e ajustar a margem
+    a img {
+        width: 120px; // Aumentar o tamanho da logo
+        margin: 1rem auto; // Diminuir a margem para aproximar das categorias
     }
 
-    // Estilos para a logo
-    a img {
-        max-width: 120px;
-        margin: 20px 0;
+    // Centralizar as categorias e ajustar a largura
+    .category-dropdown {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        
+        button {
+            margin: 0.5rem auto; // Reduzir a margem vertical e centralizar horizontalmente
+            width: 60%; // Reduzir a largura dos botões para que não fiquem tão esticados
+            // Adicione estilos adicionais aqui, se necessário
+        }
     }
 `;
 
