@@ -4,11 +4,7 @@ import { FaTimes } from "react-icons/fa";
 import { Container } from "./styles";
 import PropTypes from "prop-types";
 
-function MobileMenu({
-  setMobileMenuActive,
-  searchBar,
-  renderCategoryDropdown,
-}) {
+function MobileMenu({ setMobileMenuActive, renderCategoryDropdown }) {
   return (
     <Container>
       <div className="menu-header">
@@ -17,8 +13,8 @@ function MobileMenu({
           data-testid="exit-mobile-menu"
           type="button"
           onClick={() => setMobileMenuActive(false)}
-          aria-label="Fechar menu" // Melhoria de acessibilidade
-          style={{ cursor: "pointer" }} // Feedback visual melhorado
+          aria-label="Fechar menu"
+          style={{ cursor: "pointer" }}
         >
           <FaTimes size={40} />
         </button>
@@ -37,18 +33,15 @@ function MobileMenu({
             />
           </a>
         </Link>
-        {searchBar()}
         <div className="category-dropdown">{renderCategoryDropdown()}</div>
       </div>
     </Container>
   );
 }
 
-// Atualizando PropTypes
 MobileMenu.propTypes = {
   setMobileMenuActive: PropTypes.func.isRequired,
-  searchBar: PropTypes.func.isRequired,
   renderCategoryDropdown: PropTypes.func, // Continua opcional
 };
 
-export default React.memo(MobileMenu); // Otimização de performance com React.memo
+export default React.memo(MobileMenu);

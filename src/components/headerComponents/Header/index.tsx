@@ -93,7 +93,9 @@ export default function Header() {
             precisa
           </h1>
 
-          {/* Envolve todos os elementos, exceto o título, para controle de visibilidade */}
+          {renderSearchBar()}
+
+          {/* Controla a visibilidade de outros elementos com base no estado do menu móvel */}
           <div style={{ display: getMobileMenuActive ? "none" : "block" }}>
             <div className="limit-center">
               <Link href="/">
@@ -101,8 +103,6 @@ export default function Header() {
                   <img src="/images/logo192x.png" alt="logo" title="Home" />
                 </a>
               </Link>
-
-              {getMobileMenuActive ? null : renderSearchBar()}
 
               <div className="category-dropdown">
                 {renderCategoryDropdown()}
@@ -121,7 +121,6 @@ export default function Header() {
       {getMobileMenuActive && (
         <MobileMenu
           setMobileMenuActive={setMobileMenuActive}
-          searchBar={renderSearchBar}
           renderCategoryDropdown={renderCategoryDropdown}
         />
       )}

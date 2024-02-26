@@ -35,7 +35,7 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column; // Organiza o conteúdo em coluna para o alinhamento correto
         align-items: center; // Centraliza os elementos filhos horizontalmente
-        justify-content: space-between; // Distribui o espaço verticalmente
+        justify-content: center; // Distribui o espaço verticalmente
         width: 100%;
         max-width: 1200px; // Define uma largura máxima para o conteúdo central
         margin: 0 auto; // Centraliza o .limit-center dentro do header
@@ -112,7 +112,7 @@ export const SearchBarForm = styled.form<{ isActive?: boolean }>`
     justify-content: center;
     width: 90%; // Aumentando a largura do searchBar
     max-width: 1200px; // Aumentando o limite máximo da largura para telas maiores
-    margin: auto; // Centraliza a barra de pesquisa verticalmente e horizontalmente
+    margin: 20px auto; // Centraliza a barra de pesquisa verticalmente e horizontalmente
 
     input {
         flex: 1; // O input ocupa todo o espaço disponível exceto o botão
