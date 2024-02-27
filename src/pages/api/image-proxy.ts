@@ -5,11 +5,11 @@ import { buscarProdutosAtualizados } from "../../services/getUpdatedImageUrls";
 // Cache para armazenar as URLs das imagens e o horário da última atualização
 let cache: { [url: string]: { url: string; lastUpdated: number } } = {};
 
-// Função para atualizar o cache com as novas URLs
 async function atualizarCache() {
   const novasUrls = await buscarProdutosAtualizados();
   const currentTime = Date.now();
-  novasUrls.forEach((url) => {
+  novasUrls.forEach((url: string) => {
+    // Adiciona a tipagem explícita para url como string
     cache[url] = { url, lastUpdated: currentTime };
   });
 }
