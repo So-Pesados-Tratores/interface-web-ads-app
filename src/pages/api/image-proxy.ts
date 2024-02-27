@@ -1,49 +1,66 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import fetch from 'node-fetch';
+import type { NextApiRequest, NextApiResponse } from "next";
+import fetch from "node-fetch";
+import { buscarProdutosAtualizados } from "../../services/getUpdatedImageUrls";
 
-// Simulação de uma função que renova a URL da imagem
-// Você precisará substituir isso pela lógica real que interage com a API do seu serviço de armazenamento
-async function renovarURL(urlExpirada: string): Promise<string> {
-  // Implemente a lógica de renovação de URL aqui
-  // Por exemplo, fazer uma solicitação à API do seu serviço de armazenamento para obter uma nova URL
-  return urlExpirada; // Retorne a nova URL renovada
+// Cache para armazenar as URLs das imagens e o horário da última atualização
+let cache: { [url: string]: { url: string; lastUpdated: number } } = {};
+
+// Função para atualizar o cache com as novas URLs
+async function atualizarCache() {
+  const novasUrls = await buscarProdutosAtualizados();
+  const currentTime = Date.now();
+  novasUrls.forEach((url) => {
+    cache[url] = { url, lastUpdated: currentTime };
+  });
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+// Verifica se uma URL está no cache e se está atualizada
+function isUrlValid(url: string) {
+  const cachedUrl = cache[url];
+  if (!cachedUrl) return false; // URL não está no cache
+  const currentTime = Date.now();
+  return currentTime - cachedUrl.lastUpdated <= 15 * 60 * 1000; // Verifica se a URL foi atualizada nos últimos 15 minutos
+}
+
+// Função para buscar uma imagem com uma URL
+async function fetchImage(url: string) {
+  return await fetch(url);
+}
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   let { url } = req.query;
 
-  if (typeof url !== 'string' || !url) {
-    return res.status(400).json({ error: 'URL da imagem inválida ou não fornecida.' });
+  if (typeof url !== "string" || !url) {
+    return res
+      .status(400)
+      .json({ error: "URL da imagem inválida ou não fornecida." });
   }
 
-  try {
-    let imageResponse = await fetch(url, {
-      headers: {
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_PIPEFY_API_TOKEN}`
-      }
-    });
-
-    // Tenta renovar a URL se a resposta for não autorizada ou não encontrada
-    if (!imageResponse.ok && (imageResponse.status === 401 || imageResponse.status === 403 || imageResponse.status === 404)) {
-      const urlRenovada = await renovarURL(url);
-      imageResponse = await fetch(urlRenovada, {
-        headers: {
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_PIPEFY_API_TOKEN}`
-        }
-      });
-    }
-
-    if (!imageResponse.ok) {
-      throw new Error(`Erro após renovar URL: ${imageResponse.statusText}`);
-    }
-
-    const imageBuffer = await imageResponse.buffer();
-    const contentType = imageResponse.headers.get('content-type') || 'application/octet-stream';
-
-    res.setHeader('Content-Type', contentType);
-    res.send(imageBuffer);
-  } catch (error) {
-    console.error('Erro no proxy de imagem:', error);
-    res.status(500).json({ error: 'Erro interno no servidor' });
+  // Verifica se a URL está no cache e se está atualizada
+  if (!isUrlValid(url)) {
+    // Atualiza o cache
+    await atualizarCache();
   }
+
+  // Tenta servir a imagem usando a URL fornecida
+  let imageResponse = await fetchImage(url);
+
+  if (!imageResponse.ok) {
+    // Se ainda assim houver um erro, retorna um erro
+    console.error(`Erro ao acessar a imagem.`);
+    return res.status(404).json({ error: "Imagem não encontrada." });
+  }
+
+  // Se a imagem for obtida com sucesso, envia-a na resposta
+  const imageBuffer = await imageResponse.buffer();
+  const contentType =
+    imageResponse.headers.get("content-type") || "application/octet-stream";
+  res.setHeader("Content-Type", contentType);
+  res.send(imageBuffer);
 }
+
+// Executa a função de atualização do cache a cada 15 minutos
+setInterval(atualizarCache, 15 * 60 * 1000);
