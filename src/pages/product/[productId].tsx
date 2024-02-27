@@ -1,4 +1,4 @@
-import React from "react"; // Se você usa JSX, React deve ser importado.
+import React, { useEffect, useState } from "react"; // Se você usa JSX, React deve ser importado.
 import { GetStaticPaths, GetStaticProps } from "next";
 import ProductPage from "../../components/productComponents/ProductPage";
 import api from "../../services/api";
@@ -157,6 +157,33 @@ function transformProduct(record: IRecordNode): IProduct {
   return product as IProduct;
 }
 
-export default function ProductId({ product }: IProps) {
+export default function ProductId({ product: initialProduct }: IProps) {
+  // Usa useState para manter o estado do produto no componente
+  const [product, setProduct] = useState<IProduct>(initialProduct);
+
+  useEffect(() => {
+    const fetchAndUpdateProducts = async () => {
+      console.log("Atualizando URLs das imagens...");
+      // Aqui você faria a chamada à API para buscar os produtos atualizados
+      try {
+        const response = await api.post("", {
+          query: `{ table_record(id: ${product.id}) { id title record_fields { name value } } }`,
+        });
+        const updatedProduct = transformProduct(
+          response.data.data.table_record
+        );
+        setProduct(updatedProduct); // Atualiza o estado do produto com os novos dados
+      } catch (error) {
+        console.error("Erro ao buscar produtos atualizados:", error);
+      }
+    };
+
+    // Define um intervalo para atualizar as URLs das imagens a cada 10 minutos
+    const intervalId = setInterval(fetchAndUpdateProducts, 600000); // 600000 ms = 10 minutos
+
+    // Limpa o intervalo quando o componente for desmontado
+    return () => clearInterval(intervalId);
+  }, [product.id]); // Dependência para o useEffect garantindo que a atualização ocorra com base no ID do produto
+
   return <ProductPage product={product} />;
 }
