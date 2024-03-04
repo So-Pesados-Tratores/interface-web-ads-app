@@ -114,7 +114,7 @@ export default function Header() {
                   style={{ width: isProductPage ? "120px" : "192px" }}
                 >
                   <img
-                    src="/images/logo192x.png"
+                    src="logo192x.png"
                     alt="logo"
                     title="Home"
                     style={{ maxWidth: "100%" }}

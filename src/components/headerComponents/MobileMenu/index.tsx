@@ -26,7 +26,7 @@ function MobileMenu({ setMobileMenuActive, renderCategoryDropdown }) {
             style={{ display: "block", margin: "0 auto" }}
           >
             <img
-              src="/images/logo192x.png"
+              src="logo192x.png"
               alt="logo"
               title="Home"
               style={{ maxWidth: "120px" }}
