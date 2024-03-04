@@ -96,7 +96,11 @@ export default function ImageSlider({ images }: IProps) {
                 </button>
               ))
             : [1].map((i) => (
-                <img src="img-n-disp.png" key={i} data-testid="no-slider-img" />
+                <img
+                  src="/images/img-n-disp.png"
+                  key={i}
+                  data-testid="no-slider-img"
+                />
               ))}
         </Carousel>
       </div>

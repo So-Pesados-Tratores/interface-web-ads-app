@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       // Certifique-se de que product não é undefined
       if (product && product.imagens) {
         // Cria o diretório se não existir
-        const imagesDir = path.join(process.cwd(), "public/images");
+        const imagesDir = path.join(process.cwd(), "public/products/images");
         await mkdir(imagesDir, { recursive: true });
 
         const downloadPromises = product.imagens.map(async (imageUrl, i) => {
@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           await downloadImage(imageUrl, imagePath);
 
           console.log(`Imagem ${i + 1} baixada: ${imageUrl}`);
-          product.imagens[i] = `/images/${imageName}`;
+          product.imagens[i] = `/products/images/${imageName}`;
         });
 
         await Promise.all(downloadPromises);
