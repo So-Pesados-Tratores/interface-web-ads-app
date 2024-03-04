@@ -18,7 +18,7 @@
 /public/sitemap.xml
 /public/sw.js*
 /public/workbox-*
-/public/images/*
+/public/products/images/*
 
 # misc
 .DS_Store
