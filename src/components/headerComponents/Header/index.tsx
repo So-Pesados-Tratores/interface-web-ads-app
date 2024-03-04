@@ -51,8 +51,8 @@ export default function Header() {
     router.push(`/search?query=${getSearchBarText}`);
   }
 
-  function handleCategoryClick(categoryId: string) {
-    router.push(`/category/${categoryId}`);
+  function handleCategoryClick(categoryName: string) {
+    router.push(`/category/${categoryName}`);
   }
 
   const renderCategoryDropdown = () => (
@@ -60,7 +60,7 @@ export default function Header() {
       {getCategories.map((category) => (
         <button
           key={category.id}
-          onClick={() => handleCategoryClick(category.id)}
+          onClick={() => handleCategoryClick(category.name)}
         >
           {category.name}
         </button>
