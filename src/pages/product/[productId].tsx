@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react"; // Se você usa JSX, React d
 import { GetStaticPaths, GetStaticProps } from "next";
 import ProductPage from "../../components/productComponents/ProductPage";
 import api from "../../services/api";
+import fetch from "node-fetch";
+import { mkdir, writeFile } from "fs/promises";
+import path from "path";
 
 interface IRecordField {
   name: string;
@@ -25,6 +28,17 @@ export interface IProduct {
 
 interface IProps {
   product: IProduct;
+}
+
+// Função para baixar e salvar uma imagem
+async function downloadImage(url, imagePath) {
+  try {
+    const response = await fetch(url);
+    const buffer = await response.buffer();
+    await writeFile(imagePath, buffer);
+  } catch (error) {
+    console.error(`Erro ao baixar a imagem ${url}: ${error}`);
+  }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -86,7 +100,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       const product = transformProduct(response.data.data.table_record);
 
       // Certifique-se de que product não é undefined
-      if (product) {
+      if (product && product.imagens) {
+        // Cria o diretório se não existir
+        const imagesDir = path.join(process.cwd(), "public/images");
+        await mkdir(imagesDir, { recursive: true });
+
+        const downloadPromises = product.imagens.map(async (imageUrl, i) => {
+          const imageName = path.basename(new URL(imageUrl).pathname);
+          const imagePath = path.join(imagesDir, imageName);
+
+          await downloadImage(imageUrl, imagePath);
+
+          console.log(`Imagem ${i + 1} baixada: ${imageUrl}`);
+          product.imagens[i] = `/images/${imageName}`;
+        });
+
+        await Promise.all(downloadPromises);
+
         return {
           props: { product },
           revalidate: 86400, // 24 horas

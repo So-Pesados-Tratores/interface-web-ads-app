@@ -22,11 +22,13 @@ const ProductCard: React.FC<IProps> = ({ iProduct }) => {
       ? `/api/image-proxy?url=${encodeURIComponent(iProduct.imagens[0])}`
       : "";
 
+  const localImageUrl = iProduct.imagens.length > 0 ? iProduct.imagens[0] : "";
+
   return (
     <Container onClick={handleProductClick}>
       {iProduct.imagens.length > 0 && (
         <img
-          src={proxyImageUrl} // Utilize a URL do proxy aqui
+          src={localImageUrl} // Utilize a URL do proxy aqui (atualmente recebe a url baixa localmente, mas deve ser a URL do proxy no futuro)
           alt={`Imagem do produto ${iProduct.nome}`}
         />
       )}

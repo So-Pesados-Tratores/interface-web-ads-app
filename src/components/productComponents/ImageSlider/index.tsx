@@ -44,7 +44,7 @@ export default function ImageSlider({ images }: IProps) {
             </button>
 
             <img
-              src={`${process.env.BACKEND_URL}/uploads/${images[modalActiveIndex].filename}`}
+              src={images[modalActiveIndex].url}
               alt="imagem"
               data-testid="modal-img"
             />
@@ -73,7 +73,6 @@ export default function ImageSlider({ images }: IProps) {
       <div className="img-container">
         <Carousel
           className="carousel"
-          //renderThumbs={customRenderThumb}
           autoPlay={true}
           stopOnHover={true}
           infiniteLoop={true}

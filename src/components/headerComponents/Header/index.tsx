@@ -69,7 +69,10 @@ export default function Header() {
   );
 
   const renderSearchBar = () => (
-    <SearchBarForm onSubmit={handleSearch}>
+    <SearchBarForm
+      onSubmit={handleSearch}
+      style={{ width: isProductPage ? "80%" : "100%" }}
+    >
       <input
         type="text"
         placeholder="O que você está procurando?"
@@ -106,8 +109,16 @@ export default function Header() {
           <div style={{ display: getMobileMenuActive ? "none" : "block" }}>
             <div className="limit-center">
               <Link href="/">
-                <a className="logo">
-                  <img src="/images/logo192x.png" alt="logo" title="Home" />
+                <a
+                  className="logo"
+                  style={{ width: isProductPage ? "120px" : "192px" }}
+                >
+                  <img
+                    src="/images/logo192x.png"
+                    alt="logo"
+                    title="Home"
+                    style={{ maxWidth: "100%" }}
+                  />
                 </a>
               </Link>
 
