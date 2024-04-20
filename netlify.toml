@@ -1,6 +1,0 @@
-[build.environment]
-  NODE_VERSION = "16"
-
-[build]
-  command = "npm run build" # Remove `&& next export`
-  publish = ".next" # ou outro diretório dependendo da configuração
