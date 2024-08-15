@@ -6,6 +6,7 @@ import { products } from "../utils/products";
 import ShopList from "../components/ShopList";
 import Banner from "../components/Banner/Banner";
 import useWindowScrollToTop from "../hooks/useWindowScrollToTop";
+import { useSelector } from "react-redux";
 
 const Shop = () => {
   const [filterList, setFilterList] = useState(

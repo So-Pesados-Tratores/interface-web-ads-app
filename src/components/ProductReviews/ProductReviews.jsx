@@ -18,7 +18,7 @@ const ProductReviews = ({ selectedProduct }) => {
             style={{ color: listSelected === "rev" ? "black" : "#9c9b9b" }}
             onClick={() => setListSelected("rev")}
           >
-            Reviews ({selectedProduct?.reviews.length})
+            Reviews ({selectedProduct?.reviews?.length})
           </li>
         </ul>
         {listSelected === "desc" ? (

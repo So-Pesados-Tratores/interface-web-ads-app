@@ -22,10 +22,10 @@ const ProductDetails = ({ selectedProduct }) => {
       <Container>
         <Row className="justify-content-center">
           <Col md={6}>
-            <img loading="lazy" src={selectedProduct?.imgUrl} alt="" />
+            <img loading="lazy" src={selectedProduct?.urlImages && selectedProduct?.urlImages[0]} alt="" />
           </Col>
           <Col md={6}>
-            <h2>{selectedProduct?.productName}</h2>
+            <h2>{selectedProduct?.name}</h2>
             <div className="rate">
               <div className="stars">
                 <i className="fa fa-star"></i>

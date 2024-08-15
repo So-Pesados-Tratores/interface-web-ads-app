@@ -4,12 +4,22 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <footer>
-      <Container>
+    <footer 
+    style={{
+      maxHeight: 320,
+    }}
+    >
+      <Container
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          marginTop: -25
+        }}
+      >
         <Row className="footer-row">
           <Col md={3} sm={5} className="box">
             <div className="logo">
-              <img src="logo.png" alt="logo" />
+              <img src="logo.png" alt="logo" width={200} />
             </div>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
@@ -17,7 +27,7 @@ const Footer = () => {
               et lectus vel ut sollicitudin elit at amet.
             </p>
           </Col>
-          <Col md={3} sm={5} className="box">
+          <Col md={3} sm={5} className="box" style={{paddingTop: 15}}>
             <h2>About Us</h2>
             <ul>
               {/* <li>Careers</li>
@@ -43,7 +53,7 @@ const Footer = () => {
                 <li>Returns & Refunds </li>
               </ul>
             </Col> */}
-          <Col md={3} sm={5} className="box">
+          <Col md={3} sm={5} className="box" style={{paddingTop: 15}}>
             <h2>Contact Us</h2>
             <ul>
               <li>
