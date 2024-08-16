@@ -1,52 +1,82 @@
-import Select from 'react-select';
-import { products } from '../utils/products';
-
-const options = [
-    { value: "sofa", label: "Sofa" },
-    { value: "chair", label: "Chair" },
-    { value: "watch", label: "Watch" },
-    { value: "mobile", label: "Mobile" },
-    { value: "wireless", label: "Wireless" },
-];
+import Select from "react-select";
+import { useCallback, useEffect, useState } from "react";
+import { ProductService } from "../services/routes/products";
 
 const customStyles = {
-    control: (provided) => ({
-        ...provided,
-        backgroundColor: "#0f3460",
-        color: "white",
-        borderRadius: "5px",
-        border: "none",
-        boxShadow: "none",
-        width: "200px",
-        height: "40px",
-    }),
-    option: (provided, state) => ({
-        ...provided,
-        backgroundColor: state.isSelected ? "#0f3460" : "white",
-        color: state.isSelected ? "white" : "#0f3460",
-        "&:hover": {
-        backgroundColor: "#0f3460",
-        color: "white",
-        },
-    }),
-    singleValue: (provided) => ({
-        ...provided,
-        color: "white",
-    }),
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: "#0f3460",
+    color: "white",
+    borderRadius: "5px",
+    border: "none",
+    boxShadow: "none",
+    width: "200px",
+    height: "40px",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? "#0f3460" : "white",
+    color: state.isSelected ? "white" : "#0f3460",
+    "&:hover": {
+      backgroundColor: "#0f3460",
+      color: "white",
+    },
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "white",
+  }),
 };
 
-const FilterSelect = ({setFilterList}) => {
-    const handleChange = (selectedOption)=> {
-        setFilterList(products.filter(item => item.category ===selectedOption.value))
+const FilterSelect = ({ products, setFilterList }) => {
+  const [loading, setLoading] = useState(false);
+  const [categoriesList, setCategoriesList] = useState([]);
+
+  const handleGetCategories = useCallback(() => {
+    setLoading(true);
+    ProductService.getCategories()
+      .then((res) => {
+        setCategoriesList(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    handleGetCategories();
+  }, [handleGetCategories]);
+
+  const handleChange = (selectedOption) => {
+    if (selectedOption.value === "") {
+      setFilterList(products); // Mostra todos os produtos
+    } else {
+      setFilterList(
+        products.filter((item) => item.category === selectedOption.value)
+      );
     }
-    return (
+  };
+
+  const formattedCategories = [
+    { value: "", label: "Limpar Filtro" },
+    ...categoriesList.map((category) => ({
+      value: category.name,
+      label: category.description,
+    })),
+  ];
+
+  return (
     <Select
-    options={options}
-    defaultValue={{ value: "", label: "Filter By Category" }}
-    styles={customStyles}
-    onChange={handleChange}
+      options={formattedCategories}
+      defaultValue={{ value: "", label: "Filtre pela Categoria" }}
+      styles={customStyles}
+      onChange={handleChange}
+      isLoading={loading}
     />
-    );
+  );
 };
 
 export default FilterSelect;
