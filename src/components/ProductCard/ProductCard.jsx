@@ -50,8 +50,23 @@ const ProductCard = ({ title, productItem }) => {
           <i className="fa fa-star"></i>
           <i className="fa fa-star"></i>
         </div> */}
-        <div className="price">
-          <h4>R${productItem.price}</h4>
+        <div
+          className="price"
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <h5
+            style={{
+              marginTop: 10,
+            }}
+          >
+            {productItem.price?.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </h5>
           <button
             aria-label="Add"
             type="submit"
