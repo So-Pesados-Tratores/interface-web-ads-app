@@ -50,7 +50,7 @@ const Product = () => {
 
   return (
     <Fragment>
-      <Banner title={selectedProduct?.productName} />
+      <Banner title={selectedProduct?.name} />
       <ProductDetails selectedProduct={selectedProduct} isLoading={loading} />
       {/* <ProductReviews selectedProduct={selectedProduct} /> */}
       {/* <section className="related-products">
