@@ -52,7 +52,7 @@ const FilterSelect = ({ products, setFilterList }) => {
 
   const handleChange = (selectedOption) => {
     if (selectedOption.value === "") {
-      setFilterList(products); // Mostra todos os produtos
+      setFilterList(products);
     } else {
       setFilterList(
         products.filter((item) => item.category === selectedOption.value)
@@ -62,10 +62,7 @@ const FilterSelect = ({ products, setFilterList }) => {
 
   const formattedCategories = [
     { value: "", label: "Limpar Filtro" },
-    ...categoriesList.map((category) => ({
-      value: category.name,
-      label: category.description,
-    })),
+    ...categoriesList,
   ];
 
   return (
