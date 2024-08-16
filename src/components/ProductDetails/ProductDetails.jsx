@@ -54,7 +54,12 @@ const ProductDetails = ({ selectedProduct }) => {
                 width: "100%",
               }}
             >
-              <span className="price">R${selectedProduct?.price}</span>
+              <span className="price">
+                {selectedProduct?.price?.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </span>
               <span>Categoria: {selectedProduct?.category}</span>
             </div>
             {/* <p>{selectedProduct?.shortDesc}</p> */}
