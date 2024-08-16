@@ -15,5 +15,13 @@ export const ProductService = {
     )
 
     return res.data
-  }
+  },
+
+  getCategories: async () => {
+    const res = await api.get(
+      `/category`
+    );
+
+    return res.data;
+  },
 };
