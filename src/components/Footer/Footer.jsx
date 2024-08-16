@@ -2,39 +2,50 @@ import React from "react";
 import "./style.css";
 import { Col, Container, Row } from "react-bootstrap";
 
+import Logo from "../../assets/png/logo.png";
+
 const Footer = () => {
   return (
-    <footer 
-    style={{
-      maxHeight: 320,
-    }}
+    <footer
+      style={{
+        minHeight: 320,
+      }}
     >
       <Container
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          marginTop: -25
+          display: "flex",
+          alignItems: "center",
+          marginTop: -25,
         }}
       >
-        <Row className="footer-row">
+        <div
+          className="footer-row"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
           <Col md={3} sm={5} className="box">
             <div className="logo">
-              <img src="logo.png" alt="logo" width={200} />
+              <img src={Logo} alt="logo" width={200} />
             </div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-              libero id et, in gravida. Sit diam duis mauris nulla cursus. Erat
-              et lectus vel ut sollicitudin elit at amet.
+              A <strong>Só Pesados </strong>é uma empresa familiar com clientes
+              em todo o Brasil, dedicada à venda de veículos agrícolas e
+              automotivos, guiada pelos valores de Deus e comprometida com o
+              atendimento honesto e confiável.
             </p>
           </Col>
-          <Col md={3} sm={5} className="box" style={{paddingTop: 15}}>
-            <h2>About Us</h2>
+          <Col md={3} sm={5} className="box" style={{ paddingTop: 15 }}>
+            <h2>Sobre nós</h2>
             <ul>
               {/* <li>Careers</li>
               <li>Our Stores</li>
               <li>Our Cares</li> */}
-              <li>Terms & Conditions</li>
-              <li>Privacy Policy</li>
+              <li>Termos e Condições</li>
+              <li>Política de Privacidade</li>
               <li>
                 © {new Date().getFullYear()} - Desenvolvido por{" "}
                 <a href="https://www.linkedin.com/in/matheuspierro">
@@ -53,17 +64,17 @@ const Footer = () => {
                 <li>Returns & Refunds </li>
               </ul>
             </Col> */}
-          <Col md={3} sm={5} className="box" style={{paddingTop: 15}}>
-            <h2>Contact Us</h2>
+          <Col md={3} sm={5} className="box" style={{ paddingTop: 15 }}>
+            <h2>Contatos</h2>
             <ul>
               <li>
-                70 Washington Square South, New York, NY 10012, United States{" "}
+                Rodovia Carlos Tonani, SP 333, KM 103, SN- Zona Rural Barrinha
               </li>
-              <li>Email: uilib.help@gmail.com</li>
-              <li>Phone: +1 1123 456 780</li>
+              <li>Email: sopesados.venda@gmail.com</li>
+              <li>Telefone: +55 11 91588-2179</li>
             </ul>
           </Col>
-        </Row>
+        </div>
       </Container>
     </footer>
   );
