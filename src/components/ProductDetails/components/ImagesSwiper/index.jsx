@@ -9,8 +9,6 @@ export default function ImagesSwiper({ images }) {
 
   const renderSlides = () => {
     return images.map((item, index) => {
-      console.log("item", item);
-
       return (
         <SwiperSlide key={index}>
           <div
