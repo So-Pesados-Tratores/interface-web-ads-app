@@ -1,6 +1,5 @@
 import { Fragment, useCallback, useEffect, useState } from "react";
 import Section from "../components/Section";
-import { products } from "../utils/products";
 import useWindowScrollToTop from "../hooks/useWindowScrollToTop";
 import { ProductService } from "../services/routes/products";
 
@@ -26,10 +25,6 @@ const Home = () => {
     handleGetProducts();
   }, []);
 
-  const newArrivalData = productsList.filter(
-    (item) => item.category === "mobile" || item.category === "wireless" || item.category === "tratores2"
-  );
-
   // const bestSales = products.filter((item) => item.category === "sofa");
   useWindowScrollToTop();
   return (
@@ -44,7 +39,7 @@ const Home = () => {
       <Section
         title="Novidades"
         bgColor="white"
-        productItems={newArrivalData}
+        productItems={productsList}
         isLoading={loading}
       />
       {/* <Section title="Best Sales" bgColor="#f6f9fc" productItems={bestSales} /> */}
