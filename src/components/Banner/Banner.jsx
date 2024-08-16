@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import bannerLogo from "../../assets/jpg/tratorBaner.jpg";
+import bannerLogo from "../../assets/png/tratorBanner.png";
 
 import "./banner.css";
 
