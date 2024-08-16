@@ -20,7 +20,18 @@ const ShopList = ({ productItems, isLoading }) => {
   }
 
   if (!productItems?.length && !isLoading) {
-    return <h1 className="not-found">Produtos Não Encontrados!!</h1>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "50vh",
+        }}
+      >
+        <h1 className="not-found">Produtos Não Encontrados!!</h1>;
+      </div>
+    );
   }
 
   return (
