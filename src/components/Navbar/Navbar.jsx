@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "./navbar.css";
 import { Link } from "react-router-dom";
+
+import LogoImage from "../../assets/png/logo.png";
+
 const NavBar = () => {
   // const { cartList } = useSelector((state) => state.cart);
   const [expand, setExpand] = useState(false);
@@ -15,6 +18,7 @@ const NavBar = () => {
     }
   }
   window.addEventListener("scroll", scrollHandler);
+
   return (
     <Navbar
       fixed="top"
@@ -23,9 +27,15 @@ const NavBar = () => {
     >
       <Container className="navbar-container">
         <Navbar.Brand to="/">
-          <img src="logo.png" alt="logo" />
+          <img
+            src={LogoImage}
+            alt="logo"
+            style={{
+              cursor: "pointer",
+            }}
+          />
         </Navbar.Brand>
-        {/* Media cart and toggle */}
+
         <div className="d-flex">
           {/* <div className="media-cart">
             <svg
