@@ -5,30 +5,31 @@ import ProductDetails from "../components/ProductDetails/ProductDetails";
 import ProductReviews from "../components/ProductReviews/ProductReviews";
 import useWindowScrollToTop from "../hooks/useWindowScrollToTop";
 import { ProductService } from "../services/routes/products";
+import { MoonLoader } from "react-spinners";
 
 const Product = () => {
   const { id } = useParams();
-  
-  const [selectedProduct, setSelectedProduct] = useState({})
-  const [loading, setLoading] = useState(false)
+
+  const [selectedProduct, setSelectedProduct] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleGetProductById = useCallback(() => {
-    setLoading(true)
-    ProductService.getProductsById({ id: id})
-    .then((res) => {
-      setSelectedProduct(res)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      setLoading(false)
-    })
-  }, [])
+    setLoading(true);
+    ProductService.getProductsById({ id: id })
+      .then((res) => {
+        setSelectedProduct(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
-    handleGetProductById()
-  }, [])
+    handleGetProductById();
+  }, []);
 
   // const [relatedProducts, setRelatedProducts] = useState([]);
   // useEffect(() => {
@@ -50,7 +51,7 @@ const Product = () => {
   return (
     <Fragment>
       <Banner title={selectedProduct?.productName} />
-      <ProductDetails selectedProduct={selectedProduct} />
+      <ProductDetails selectedProduct={selectedProduct} isLoading={loading} />
       {/* <ProductReviews selectedProduct={selectedProduct} /> */}
       {/* <section className="related-products">
         <Container>
