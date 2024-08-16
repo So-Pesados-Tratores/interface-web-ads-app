@@ -24,7 +24,12 @@ const ShopList = ({ productItems, isLoading }) => {
   }
 
   return (
-    <Row className="justify-content-center">
+    <Row
+      className="justify-content-center"
+      style={{
+        marginTop: 50,
+      }}
+    >
       {productItems?.map((productItem) => {
         return (
           <ProductCard
