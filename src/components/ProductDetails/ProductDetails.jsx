@@ -5,8 +5,9 @@ import { toast } from "react-toastify";
 import { addToCart } from "../../app/features/cart/cartSlice";
 import "./product-details.css";
 import ImagesSwiper from "./components/ImagesSwiper";
+import { MoonLoader } from "react-spinners";
 
-const ProductDetails = ({ selectedProduct }) => {
+const ProductDetails = ({ selectedProduct, isLoading }) => {
   // const dispatch = useDispatch();
 
   // const [quantity, setQuantity] = useState(1);
@@ -27,6 +28,36 @@ const ProductDetails = ({ selectedProduct }) => {
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
     window.open(whatsappUrl, "_blank");
   };
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "80vh",
+        }}
+      >
+        <MoonLoader />
+      </div>
+    );
+  }
+
+  if (!selectedProduct && !isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: 300,
+        }}
+      >
+        <h2>Nenhuma informação encontrada no momento</h2>
+      </div>
+    );
+  }
 
   return (
     <section className="product-page">
