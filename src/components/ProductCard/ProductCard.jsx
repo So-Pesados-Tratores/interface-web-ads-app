@@ -11,26 +11,32 @@ const ProductCard = ({ title, productItem }) => {
   const router = useNavigate();
 
   const handelClick = () => {
-    dispatch(addProduct(productItem))
+    dispatch(addProduct(productItem));
     router(`/shop/${productItem.tractor_id}`);
   };
 
-  const handelAdd = (productItem) => {
-    dispatch(addToCart({ product: productItem, num: 1 }));
-    toast.success("Product has been added to cart!");
+  const handleNavigateToWpp = ({ name }) => {
+    const phoneNumber = "5511973714233";
+    const message = encodeURIComponent(
+      `Olá, tudo bem?
+      Estou interessado no produto: ${name}`
+    );
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+    window.open(whatsappUrl, "_blank");
   };
+
   return (
     <Col md={3} sm={5} xs={10} className="product mtop">
       {title === "Big Discount" ? (
         <span className="discount">{productItem.discount}% Off</span>
       ) : null}
 
-           <img
-           loading="lazy"
-           onClick={() => handelClick()}
-           src={productItem.urlImages && productItem.urlImages[0]}
-           alt=""
-         />
+      <img
+        loading="lazy"
+        onClick={() => handelClick()}
+        src={productItem.urlImages && productItem.urlImages[0]}
+        alt=""
+      />
 
       <div className="product-like">
         <ion-icon name="heart-outline"></ion-icon>
@@ -50,7 +56,7 @@ const ProductCard = ({ title, productItem }) => {
             aria-label="Add"
             type="submit"
             className="add"
-            onClick={() => handelAdd(productItem)}
+            onClick={() => handleNavigateToWpp({ name: productItem.name })}
           >
             <ion-icon name="logo-whatsapp"></ion-icon>
           </button>
