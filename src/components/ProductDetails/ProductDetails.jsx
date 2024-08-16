@@ -18,7 +18,15 @@ const ProductDetails = ({ selectedProduct }) => {
   //   toast.success("Product has been added to cart!");
   // };
 
-  console.log(selectedProduct);
+  const handleNavigateToWpp = () => {
+    const phoneNumber = "5511973714233";
+    const message = encodeURIComponent(
+      `Olá, tudo bem?
+      Estou interessado no produto: ${selectedProduct?.name}`
+    );
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  };
 
   return (
     <section className="product-page">
@@ -148,7 +156,7 @@ const ProductDetails = ({ selectedProduct }) => {
                 aria-label="Add"
                 type="submit"
                 className="add"
-                onClick={() => console.log("Entre em contato")}
+                onClick={handleNavigateToWpp}
               >
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </button>
