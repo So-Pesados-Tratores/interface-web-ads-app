@@ -2,6 +2,8 @@ import React from "react";
 import "./style.css";
 import { Col, Container, Row } from "react-bootstrap";
 
+import PDF from "../../assets/pdf/privacyAndPolicy.pdf";
+
 import Logo from "../../assets/png/logo.png";
 
 const Footer = () => {
@@ -45,11 +47,29 @@ const Footer = () => {
               <li>Our Stores</li>
               <li>Our Cares</li> */}
               <li>Termos e Condições</li>
-              <li>Política de Privacidade</li>
+              <li>
+                <a
+                  href={PDF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                >
+                  Política de Privacidade
+                </a>
+              </li>
               <li>
                 © {new Date().getFullYear()} - Desenvolvido por{" "}
-                <a href="https://www.linkedin.com/in/matheuspierro">
-                  Matheus Ramos de Pierro
+                <a
+                  href="https://www.linkedin.com/in/matheuspierro"
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                >
+                  <strong>Matheus Ramos de Pierro</strong>
                 </a>
               </li>
             </ul>
