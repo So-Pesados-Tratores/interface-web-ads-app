@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { addToCart } from "../../app/features/cart/cartSlice";
 import "./product-details.css";
+import ImagesSwiper from "./components/ImagesSwiper";
 
 const ProductDetails = ({ selectedProduct }) => {
   // const dispatch = useDispatch();
@@ -24,11 +25,7 @@ const ProductDetails = ({ selectedProduct }) => {
       <Container>
         <Row className="justify-content-center">
           <Col md={6}>
-            <img
-              loading="lazy"
-              src={selectedProduct?.urlImages && selectedProduct?.urlImages[0]}
-              alt=""
-            />
+            <ImagesSwiper images={selectedProduct?.urlImages} />
           </Col>
           <Col md={6}>
             <h2
